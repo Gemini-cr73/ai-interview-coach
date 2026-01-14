@@ -1,15 +1,15 @@
 # 🤖 AI Interview Coach
 
 <p align="center">
-  <a href="https://app.ai-coach-lab.com">
-    <img src="https://img.shields.io/badge/Live_App-Online-brightgreen?style=for-the-badge&logo=microsoftazure" alt="Live App" />
+  <a href="https://api.ai-coach-lab.com">
+    <img src="https://img.shields.io/badge/Live_App-Online-brightgreen?style=for-the-badge&logo=azuredevops" />
   </a>
+  <img src="https://img.shields.io/badge/Cloud-Azure_App_Service-0078D4?style=for-the-badge&logo=microsoftazure" />
   <img src="https://img.shields.io/badge/API-FastAPI-009688?style=for-the-badge&logo=fastapi" />
   <img src="https://img.shields.io/badge/UI-Streamlit-FF4B4B?style=for-the-badge&logo=streamlit" />
-  <img src="https://img.shields.io/badge/LLM-Ollama-black?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/LLM-Ollama_Local-000000?style=for-the-badge&logo=ollama" />
   <img src="https://img.shields.io/badge/Container-Docker-2496ED?style=for-the-badge&logo=docker" />
-  <img src="https://img.shields.io/badge/Cloud-Azure_App_Service-0078D4?style=for-the-badge&logo=microsoftazure" />
-  <img src="https://img.shields.io/badge/v1.0.0-RELEASE-success?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python" />
 </p>
 
 > **AI-powered interview practice platform for AI Developers and LLM Engineers.**  
@@ -112,4 +112,5 @@ Answer, rubric, and instructions are sent to Ollama with enforced JSON schema:
   "missing_concepts": [],
   "improvements": []
 }
+
 
