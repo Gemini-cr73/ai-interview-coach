@@ -61,8 +61,10 @@ The system uses a two-service architecture separating UI and evaluation logic.
 
 ### 🌐 Production Architecture (Azure App Service)
 
+## 🧩 Architecture Overview
+
 <p align="center">
-  <img src="docs/img/ai-interview-coach/architecture.png" width="850"/>
+  <img src="docs/img/ai-interview-coach/architecture.png?raw=1" width="850"/>
 </p>
 
 **Flow**
@@ -112,6 +114,7 @@ Answer, rubric, and instructions are sent to Ollama with enforced JSON schema:
   "missing_concepts": [],
   "improvements": []
 }
+
 
 
 
