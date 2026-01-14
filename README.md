@@ -63,6 +63,8 @@ The system uses a two-service architecture separating UI and evaluation logic.
 
 ## 🧩 Architecture Overview
 
+The system uses a two-service architecture separating UI and evaluation logic.
+
 <p align="center">
   <a href="docs/img/ai-interview-coach/architecture.png">
     <img src="docs/img/ai-interview-coach/architecture.png" width="950"/>
@@ -86,38 +88,57 @@ The system uses a two-service architecture separating UI and evaluation logic.
 
 ## 🧠 How Scoring Works (Technical Design)
 
-The evaluation pipeline combines deterministic validation with LLM semantic grading to reduce hallucination bias and increase consistency.
+AI Interview Coach uses a **hybrid evaluation pipeline** designed to balance **consistency (deterministic scoring)** with **semantic understanding (LLM grading)**.
 
-### 1. Concept Rubric Mapping
+Why hybrid matters:
+- Pure LLM grading can drift across runs and over-reward confident phrasing.
+- Pure keyword scoring misses correct answers written in different wording.
+- Hybrid scoring gives a repeatable baseline **plus** semantic validation.
 
-Each question defines:
-- Required technical concepts
-- Optional advanced concepts
+### 1) Rubric → Concept Map (Per Question)
 
-This acts as a deterministic baseline.
+Each question includes a rubric with:
 
-### 2. Rule-Based Validation Layer
+- **Required concepts** (must-have ideas)
+- **Optional / advanced concepts** (bonus depth)
+- Common misconceptions (if applicable)
 
-The system checks for:
-- Keyword presence
-- Concept mentions
-- Structural completeness
+This rubric becomes the *ground truth* reference for scoring.
 
-Answers failing basic requirements cannot score highly regardless of phrasing quality.
+### 2) Rule-Based Validation Layer (Deterministic)
 
-### 3. LLM Semantic Assessment
+Before any semantic grading, the answer is checked for baseline quality signals:
 
-Answer, rubric, and instructions are sent to Ollama with enforced JSON schema:
+- **Concept coverage** (required ideas mentioned)
+- **Minimum completeness** (not empty / not off-topic)
+- **Structure checks** (basic reasoning or steps when expected)
+
+This layer prevents high scores when an answer is vague but “sounds good”.
+
+**Result:** a deterministic baseline score and a list of missing required concepts.
+
+### 3) LLM Semantic Assessment (Ollama, JSON Output)
+
+Next, the system sends the following to Ollama:
+
+- The **question**
+- The **rubric**
+- The **user answer**
+- Strict instructions to return **JSON only** in a fixed schema
+
+The LLM evaluates:
+- correctness of reasoning
+- whether concepts are used accurately
+- clarity and technical depth
+
+Example response schema:
 
 ```json
 {
-  "score": 0-100,
+  "score": 0,
   "strengths": [],
   "missing_concepts": [],
   "improvements": []
 }
-
-
-
 
 
