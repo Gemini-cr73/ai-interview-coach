@@ -1,7 +1,7 @@
 # 🤖 AI Interview Coach
 
 <p align="center">
-  <a href="https://api.ai-coach-lab.com">
+  <a href="https://app.ai-coach-lab.com">
     <img src="https://img.shields.io/badge/Live_App-Online-brightgreen?style=for-the-badge&logo=azuredevops" />
   </a>
   <img src="https://img.shields.io/badge/Cloud-Azure_App_Service-0078D4?style=for-the-badge&logo=microsoftazure" />
@@ -12,58 +12,56 @@
   <img src="https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python" />
 </p>
 
-> **AI-powered interview practice platform for AI Developers and LLM Engineers.**  
-> Generates role-based technical questions, evaluates answers using hybrid scoring, and provides structured coaching — all running locally with Ollama (no paid APIs).
+> **AI-powered interview practice platform for AI Developers, LLM Engineers, and ML practitioners.**  
+> Generates role-based technical questions, evaluates answers with a hybrid scoring pipeline, and delivers structured coaching feedback through a production-style UI and API architecture.
 
-🔗 **Live App:** https://app.ai-coach-lab.com  
-📡 **Status:** ✓ Online & Secure (TLS)  
-🧱 **Stack:** Python · FastAPI · Streamlit · Ollama · Docker · Azure App Service
+## 🌐 Live Deployment
+
+- **UI:** https://app.ai-coach-lab.com
+- **API:** https://api.ai-coach-lab.com
+- **API Docs:** https://api.ai-coach-lab.com/docs
 
 ## 📌 Overview
 
-AI Interview Coach simulates real technical interviews for:
+AI Interview Coach simulates realistic technical interviews for:
 
 - AI Engineers
 - LLM Application Developers
-- Data & ML Engineers
+- Data & Machine Learning Engineers
 
 The platform provides:
 
 - Dynamically generated technical questions
-- Answer evaluation using deterministic + LLM hybrid scoring
+- Hybrid answer evaluation using deterministic checks and LLM-based semantic review
 - Structured coaching feedback
-- Performance classification (Junior / Mid / Senior)
+- Performance classification aligned to Junior / Mid / Senior expectations
 
-All LLM inference runs **locally via Ollama**, enabling privacy-safe and cost-free usage.
+All LLM inference runs locally through **Ollama**, which supports privacy-aware and cost-conscious experimentation without relying on paid inference APIs.
 
-## 🎯 Purpose of the Project
+## 🎯 Project Purpose
 
-✔ Demonstrates production-ready LLM application design  
-✔ Shows hybrid evaluation logic (rule-based + semantic scoring)  
-✔ Full Dockerized deployment to Azure  
-✔ Clean separation of UI and API services  
-✔ Excellent interview and hiring portfolio project 🎓💼
+This project was built to demonstrate:
 
-## 🎮 Application Features
+- Production-style LLM application design
+- Hybrid evaluation logic combining deterministic scoring with semantic assessment
+- Clean separation between UI and backend services
+- Dockerized deployment to Azure App Service
+- A portfolio-ready AI product with practical user value
+
+## 🎮 Core Features
 
 | Feature | Description |
 |--------|------------|
-| 🎯 Role-Based Questions | Junior / Mid / Senior / Mixed difficulty |
-| ⚙️ Local LLM Inference | Ollama-hosted models, no external APIs |
-| 📊 Hybrid Scoring Engine | Rule-based + LLM semantic grading |
-| 🧠 Structured Coaching | JSON-based feedback parsing |
-| 📈 Performance Summary | Per-question + overall scoring |
-| 🔁 Randomized Question Sets | Prevents repeated prompts |
+| 🎯 Role-Based Questions | Junior / Mid / Senior / Mixed difficulty interview prompts |
+| ⚙️ Local LLM Inference | Ollama-hosted models with no paid external API dependency |
+| 📊 Hybrid Scoring Engine | Deterministic baseline checks + LLM semantic evaluation |
+| 🧠 Structured Coaching | JSON-based coaching feedback parsing and display |
+| 📈 Performance Summary | Per-question and overall scoring feedback |
+| 🔁 Randomized Question Sets | Reduces repetitive prompt patterns across sessions |
 
 ## 🧩 Architecture Overview
 
-The system uses a two-service architecture separating UI and evaluation logic.
-
-### 🌐 Production Architecture (Azure App Service)
-
-## 🧩 Architecture Overview
-
-The system uses a two-service architecture separating UI and evaluation logic.
+The application uses a two-service architecture that separates the interview interface from the evaluation engine.
 
 <p align="center">
   <a href="docs/img/ai-interview-coach/architecture.png">
@@ -71,67 +69,69 @@ The system uses a two-service architecture separating UI and evaluation logic.
   </a>
 </p>
 
-**Flow**
+### Request Flow
 
-1. User accesses Streamlit UI in browser  
-2. UI sends requests to FastAPI backend  
-3. FastAPI invokes Ollama locally for LLM inference  
-4. Scoring engine evaluates answers and returns structured feedback  
+1. User interacts with the Streamlit UI in the browser  
+2. The UI sends requests to the FastAPI backend  
+3. FastAPI processes question generation and answer evaluation  
+4. Ollama performs local LLM inference for semantic assessment  
+5. Structured scoring and coaching feedback are returned to the UI  
 
 | Component | Role |
 |--------|------|
-| **Streamlit UI** | Interview interface and visualization |
-| **FastAPI API** | Question generation and scoring engine |
+| **Streamlit UI** | Interview experience and results visualization |
+| **FastAPI API** | Question generation, scoring, and orchestration |
 | **Ollama Runtime** | Local LLM inference |
-| **Docker Containers** | Service isolation and deployment |
-| **Azure App Service** | Public hosting of containerized services |
+| **Docker Containers** | Service packaging and deployment consistency |
+| **Azure App Service** | Public hosting for the containerized application |
 
-## 🧠 How Scoring Works (Technical Design)
+## 🧠 How Scoring Works
 
-AI Interview Coach uses a **hybrid evaluation pipeline** designed to balance **consistency (deterministic scoring)** with **semantic understanding (LLM grading)**.
+AI Interview Coach uses a **hybrid evaluation pipeline** designed to balance **consistency** and **semantic understanding**.
 
-Why hybrid matters:
-- Pure LLM grading can drift across runs and over-reward confident phrasing.
-- Pure keyword scoring misses correct answers written in different wording.
-- Hybrid scoring gives a repeatable baseline **plus** semantic validation.
+### Why Hybrid Scoring Matters
 
-### 1) Rubric → Concept Map (Per Question)
+- Pure LLM grading can drift across runs
+- Pure keyword scoring can miss valid answers phrased differently
+- A hybrid approach provides a repeatable baseline plus semantic validation
+
+### 1. Rubric to Concept Map
 
 Each question includes a rubric with:
 
-- **Required concepts** (must-have ideas)
-- **Optional / advanced concepts** (bonus depth)
-- Common misconceptions (if applicable)
+- **Required concepts**
+- **Optional or advanced concepts**
+- Possible misconceptions where relevant
 
-This rubric becomes the *ground truth* reference for scoring.
+This rubric becomes the ground-truth reference for evaluation.
 
-### 2) Rule-Based Validation Layer (Deterministic)
+### 2. Deterministic Validation Layer
 
-Before any semantic grading, the answer is checked for baseline quality signals:
+Before semantic grading, the system checks:
 
-- **Concept coverage** (required ideas mentioned)
-- **Minimum completeness** (not empty / not off-topic)
-- **Structure checks** (basic reasoning or steps when expected)
+- Concept coverage
+- Minimum completeness
+- Basic structural quality when reasoning is expected
 
-This layer prevents high scores when an answer is vague but “sounds good”.
+This layer reduces the chance of vague but polished answers receiving inflated scores.
 
-**Result:** a deterministic baseline score and a list of missing required concepts.
+### 3. LLM Semantic Assessment
 
-### 3) LLM Semantic Assessment (Ollama, JSON Output)
+The backend sends the following to Ollama:
 
-Next, the system sends the following to Ollama:
+- the question
+- the rubric
+- the user answer
+- strict instructions to return JSON in a fixed schema
 
-- The **question**
-- The **rubric**
-- The **user answer**
-- Strict instructions to return **JSON only** in a fixed schema
+The LLM then evaluates:
 
-The LLM evaluates:
-- correctness of reasoning
-- whether concepts are used accurately
-- clarity and technical depth
+- technical correctness
+- reasoning quality
+- concept accuracy
+- clarity and depth
 
-Example response schema:
+Example response format:
 
 ```json
 {
@@ -140,5 +140,3 @@ Example response schema:
   "missing_concepts": [],
   "improvements": []
 }
-
-
