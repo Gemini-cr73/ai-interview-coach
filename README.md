@@ -15,11 +15,11 @@
 > **AI-powered interview practice platform for AI Developers, LLM Engineers, and ML practitioners.**  
 > Generates role-based technical questions, evaluates answers with a hybrid scoring pipeline, and delivers structured coaching feedback through a production-style UI and API architecture.
 
-## 🌐 Live Deployment
+🌐 Live Deployment
 
-- **UI:** https://app.ai-coach-lab.com
-- **API:** https://api.ai-coach-lab.com
-- **API Docs:** https://api.ai-coach-lab.com/docs
+- UI: https://crb-ai-interview-coach.streamlit.app
+- API: https://api.ai-coach-lab.com
+- API Docs: https://api.ai-coach-lab.com/docs
 
 ## 📌 Overview
 
