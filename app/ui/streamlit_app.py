@@ -9,10 +9,26 @@ from typing import Any
 import requests
 import streamlit as st
 
+
 # -----------------------------
 # Config
 # -----------------------------
-DEFAULT_API_URL = os.getenv("AI_INTERVIEW_COACH_API_URL", "http://127.0.0.1:8000")
+def _get_default_api_url() -> str:
+    streamlit_secret = ""
+    try:
+        streamlit_secret = st.secrets.get("AI_INTERVIEW_COACH_API_URL", "")
+    except Exception:
+        streamlit_secret = ""
+
+    return (
+        str(streamlit_secret).strip().rstrip("/")
+        or os.getenv("AI_INTERVIEW_COACH_API_URL", "").strip().rstrip("/")
+        or os.getenv("API_BASE_URL", "").strip().rstrip("/")
+        or "http://127.0.0.1:8000"
+    )
+
+
+DEFAULT_API_URL = _get_default_api_url()
 
 # Dev tools are hidden unless you explicitly enable them:
 # PowerShell (current session):  $env:AI_INTERVIEW_COACH_DEV="1"
@@ -294,10 +310,10 @@ with colA:
                     "Open /docs and confirm POST /questions response format."
                 )
             else:
+                # ✅ Build unique instance IDs to prevent DuplicateWidgetID
                 st.session_state.questions = questions
                 st.session_state.question_specs = specs
 
-                # ✅ Build unique instance IDs to prevent DuplicateWidgetID
                 counts: dict[str, int] = {}
                 instances: list[dict[str, str]] = []
                 for q in questions:
